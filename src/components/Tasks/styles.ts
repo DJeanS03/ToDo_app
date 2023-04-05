@@ -47,6 +47,26 @@ export const TasksContainer = styled.nav`
         margin-top: 0.75rem;
     }
 
+    .emptyTasks {
+        margin-top: 4rem;
+        display: flex;
+        align-items: center;
+        /* justify-content: center: */
+        flex-direction: column;
+        gap: 1rem;
+        color: var(--gray-300);
+        text-align: center;
+    }
+
+    .bx-clipboard {
+        font-size: 50px;
+        opacity: 0.3;
+    }
+
+    .emptyTasks p {
+        font-weight: 700;
+    }
+
    
 
 `

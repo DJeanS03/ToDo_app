@@ -1,7 +1,10 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Header } from "./components/Header"
 import { Tasks } from "./components/Tasks"
 import { GlobalStyle } from "./styles/global"
+
+
+const LOCAL_STORAGE_KEY = 'savedTasks_key'
 
 export interface TasksContextData {
   id: string /* number */
@@ -10,16 +13,22 @@ export interface TasksContextData {
 }
 
 export function App() {
-  const [tasks, setTasks] = useState<TasksContextData[]>([
-    {
-      id: 'teste',
-      description: "string",
-      isCompleted: false,
+  const [tasks, setTasks] = useState<TasksContextData[]>([])
+
+  function setLocalStorageTasks(newTasks: TasksContextData[]) {
+    setTasks(newTasks)
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newTasks))
+  }
+
+  function recoverSavedTasks() {
+    const recovered = localStorage.getItem(LOCAL_STORAGE_KEY)
+    if (recovered) {
+      setTasks(JSON.parse(recovered))
     }
-  ])
+  }
 
   function newTask(taskDescription: string) {
-    setTasks([
+    setLocalStorageTasks([
       ...tasks,
       {
         id: crypto.randomUUID(), //ver um gerador de id melhor
@@ -29,14 +38,37 @@ export function App() {
     ])
   }
 
-  
+  useEffect(() => {
+    recoverSavedTasks()
+  },[])
+
+  function deleteTasksById(taskId: string) {
+    const newTasks = tasks.filter((task) => task.id != taskId)
+
+    setLocalStorageTasks(newTasks)
+  }
+
+  function toggleCompletedTask (taskId: string) {
+    const newTasks = tasks.map(task => {
+      if(task.id === taskId) {
+        return {
+          ...task,
+          isCompleted: !task.isCompleted
+        }
+      } return task
+    })
+    setLocalStorageTasks(newTasks)
+  }
+
 
   return (
     <div>
       <GlobalStyle />
       <Header handleNewTask={newTask} />
       <Tasks 
-        tasks={tasks}
+        tasks={tasks} 
+        onDelete={deleteTasksById}
+        onComplete= {toggleCompletedTask}
       />
     </div>
   )

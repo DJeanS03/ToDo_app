@@ -5,10 +5,12 @@ import { TasksContainer } from "./styles";
 
 
 interface Props {
-    tasks: TasksContextData[]
+    tasks: TasksContextData[],
+    onDelete: (taskId: string) => void
+    onComplete: (taskId: string) => void
 }
 
-export function Tasks( {tasks}: Props ) {
+export function Tasks( {tasks, onDelete, onComplete}: Props ) {
     const amountTasks = tasks.length
     const completedTasks = tasks.filter((task) => task.isCompleted).length
 
@@ -16,7 +18,7 @@ export function Tasks( {tasks}: Props ) {
         <TasksContainer>
             <div className="header">
                 <div>
-                    <p>Tarefas Criadas 38:34</p>
+                    <p>Tarefas Criadas</p>
                     <span>{amountTasks}</span>
                 </div>
 
@@ -28,10 +30,20 @@ export function Tasks( {tasks}: Props ) {
 
             <div className='toDo_list'>
                 {tasks.map((task) => (
-                    <Task key={task.id} task={task}/> 
+                    <Task key={task.id} task={task} onDelete={onDelete} onComplete={onComplete} /> 
                 ))}
-            </div>
 
+            {tasks.length <= 0 && (
+                <section className='emptyTasks'>
+                    <i className='bx bx-clipboard'></i>
+                    <div>
+                        <p>Você ainda não tem tarefas cadastradas.</p>
+                        <span>Crie tarefas e organize seus itens a fazer.</span>
+                    </div>
+                </section>
+            )}
+
+            </div>
         </TasksContainer>
     )
 }

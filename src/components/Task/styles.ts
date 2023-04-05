@@ -1,6 +1,11 @@
 import styled from 'styled-components'
 
-export const TaskContainer = styled.nav`
+type Props = {
+  isCompleted: boolean
+}
+
+export const TaskContainer = styled.nav(({isCompleted}: Props) => (
+  `
     .container {
         background: var(--gray-500);
         width: 100%;
@@ -16,9 +21,12 @@ export const TaskContainer = styled.nav`
     .container .description {
         font-size: 0.875rem;
         line-height: 1.18rem;
-        color: var(--gray-100)
-        margin-right: auto;
+        text-align: center;
+        color: ${isCompleted ? 'var(--gray-300)' : 'var(--gray-100)'};
+        transition: 0.4s;
+        text-decoration: ${isCompleted ? 'line-through' : 'initial'}
     }
+
 
     .container .bx-trash {
         font-size: 1.25rem;
@@ -31,14 +39,13 @@ export const TaskContainer = styled.nav`
     }
 
 
-
-    @supports (-webkit-appearance: none) or (-moz-appearance: none) {
+  @supports (-webkit-appearance: none) or (-moz-appearance: none) {
     .checkbox-wrapper-13 input[type=checkbox] {
-      --active: #275EFE;
+      --active: var(--purple);
       --active-inner: #fff;
       --focus: 2px rgba(39, 94, 254, .3);
       --border: #BBC1E1;
-      --border-hover: #275EFE;
+      --border-hover: var(--purple);
       --background: #fff;
       --disabled: #F6F8FF;
       --disabled-inner: #E1E6F9;
@@ -141,6 +148,5 @@ export const TaskContainer = styled.nav`
             box-sizing: inherit;
   }
 
-
-
 `
+))
