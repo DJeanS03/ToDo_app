@@ -2,12 +2,15 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import './styles'
 import { HeaderContainer } from "./styles";
 
+import { useThemeContext } from '../../context/ThemeContext'
+
 interface Props {
     handleNewTask: (taskDescription: string) => void
 }
 
 export function Header({handleNewTask}: Props){
     const [description, setDescription] = useState('')
+    const { toggleTheme, isDarkTheme } = useThemeContext()
 
     function handleSubmit(event: FormEvent) {
         event.preventDefault()
@@ -27,6 +30,17 @@ export function Header({handleNewTask}: Props){
                         <div className="logo">
                             <span className="before"><i className='bx bxs-rocket icon' ></i> To</span>
                             <span className="after">Do</span> 
+                            
+                            <div className='themeSwitch'>
+                                <label className="switch">
+                                    <input type="checkbox"
+                                         checked={isDarkTheme === true}
+                                         onClick={() => toggleTheme()}
+                                    />
+                                    <span className="slider"></span>
+                                </label>
+                            </div>
+
                         </div> 
                         <form className="taskForm" onSubmit={handleSubmit}>
                             <input placeholder="Adicione uma nova tarefa" type="text" onChange={onChangeDescription} value={description} />

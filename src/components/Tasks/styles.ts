@@ -4,9 +4,9 @@ export const TasksContainer = styled.nav`
     
     width: 100%;
     max-width: 46rem;
-    margin 0 auto;
+    margin: 0 auto;
     margin-top: 5.625rem;
-    padding 0 1rem;
+    padding: 0 1rem;
 
     .header {
       display: flex; 
@@ -17,25 +17,25 @@ export const TasksContainer = styled.nav`
     
     .header div {
         display: flex;
-        align-itens: center;
+        align-items: center;
         gap: 0.8rem;
     }
 
     .header p {
         font-size: 0.875rem;
         font-weight: 700;
-        color: var(--blue);
+        color: ${(props) => props.theme['blue-dark']};
     }
     
     .header p.completedTasks {
-        color: var(--purple);
+        color: ${(props) => props.theme['purple-dark']};
     }
 
     .header span {
         font-size: 0.75rem;
         font-weight: 700;
-        color: var(--gray-200);
-        background: var(--gray-400);
+        color: ${(props) => props.theme['text-base']};
+        background: ${(props) => props.theme['text-button']};
         padding: 0.188rem 0.563rem;
         border-radius: 999px;
     }
@@ -51,10 +51,9 @@ export const TasksContainer = styled.nav`
         margin-top: 4rem;
         display: flex;
         align-items: center;
-        /* justify-content: center: */
         flex-direction: column;
         gap: 1rem;
-        color: var(--gray-300);
+        color: ${(props) => props.theme['text-button']};
         text-align: center;
     }
 
@@ -66,7 +65,5 @@ export const TasksContainer = styled.nav`
     .emptyTasks p {
         font-weight: 700;
     }
-
-   
 
 `

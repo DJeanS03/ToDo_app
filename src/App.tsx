@@ -2,12 +2,13 @@ import { useEffect, useState } from "react"
 import { Header } from "./components/Header"
 import { Tasks } from "./components/Tasks"
 import { GlobalStyle } from "./styles/global"
+import { ThemeContextProvider } from "./context/ThemeContext"
 
 
 const LOCAL_STORAGE_KEY = 'savedTasks_key'
 
 export interface TasksContextData {
-  id: string /* number */
+  id: string
   description: string
   isCompleted: boolean
 }
@@ -31,7 +32,7 @@ export function App() {
     setLocalStorageTasks([
       ...tasks,
       {
-        id: crypto.randomUUID(), //ver um gerador de id melhor
+        id: crypto.randomUUID(),
         description: taskDescription,
         isCompleted: false,
       }
@@ -63,6 +64,7 @@ export function App() {
 
   return (
     <div>
+      <ThemeContextProvider>
       <GlobalStyle />
       <Header handleNewTask={newTask} />
       <Tasks 
@@ -70,6 +72,7 @@ export function App() {
         onDelete={deleteTasksById}
         onComplete= {toggleCompletedTask}
       />
+      </ThemeContextProvider>
     </div>
   )
 }
