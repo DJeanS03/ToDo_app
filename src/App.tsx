@@ -5,7 +5,7 @@ import { GlobalStyle } from "./styles/global"
 import { ThemeContextProvider } from "./context/ThemeContext"
 
 
-const LOCAL_STORAGE_KEY = 'savedTasks_key'
+const LOCAL_STORAGE_KEY = 'savedTasks_key';
 
 export interface TasksContextData {
   id: string
