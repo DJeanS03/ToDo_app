@@ -4,6 +4,7 @@ export const darkTheme: typeof lightTheme  = {
     'text-title': '#f2f2f2',
     'text-base': '#d9d9d9',
     'text-button': '#808080',
+    'button-disabled': '#9bbfd4',
     'text-support': '#333333',
     placeholder: '#7C7C8A',
     'shape-secondary': '#262626',

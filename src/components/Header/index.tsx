@@ -13,10 +13,13 @@ export function Header({handleNewTask}: Props){
     const { toggleTheme, isDarkTheme } = useThemeContext()
 
     function handleSubmit(event: FormEvent) {
-        event.preventDefault()
-
-        handleNewTask(description)
-        setDescription('')
+        if(!description) {
+            event.preventDefault()
+        } else {
+            event.preventDefault()
+            handleNewTask(description)
+            setDescription('')
+        }
     }
 
     function onChangeDescription(event: ChangeEvent<HTMLInputElement>) {
@@ -44,7 +47,7 @@ export function Header({handleNewTask}: Props){
                         </div> 
                         <form className="taskForm" onSubmit={handleSubmit}>
                             <input placeholder="Adicione uma nova tarefa" type="text" onChange={onChangeDescription} value={description} />
-                            <button> Criar <i className='bx bx-plus-circle'></i></button>
+                            <button disabled={!description}> Criar <i className='bx bx-plus-circle'></i></button>
                         </form>        
                     </nav>
                 </nav>

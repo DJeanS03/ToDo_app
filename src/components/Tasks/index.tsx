@@ -6,8 +6,8 @@ import { TasksContainer } from "./styles";
 
 interface Props {
     tasks: TasksContextData[],
-    onDelete: (taskId: string) => void
-    onComplete: (taskId: string) => void
+    onDelete: (taskId: number) => void
+    onComplete: (taskId: number) => void
 }
 
 export function Tasks( {tasks, onDelete, onComplete}: Props ) {

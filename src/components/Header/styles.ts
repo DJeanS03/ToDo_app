@@ -68,6 +68,11 @@ export const HeaderContainer = styled.header`
         font-weight: 700;
     }
 
+    .taskForm button:disabled {
+        background: ${(props) => props.theme['button-disabled']};
+        cursor: not-allowed;
+    }
+
     .taskForm button i {
         font-size: 1.5rem;
     }

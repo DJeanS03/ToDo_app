@@ -8,7 +8,7 @@ import { ThemeContextProvider } from "./context/ThemeContext"
 const LOCAL_STORAGE_KEY = 'savedTasks_key';
 
 export interface TasksContextData {
-  id: string
+  id: number
   description: string
   isCompleted: boolean
 }
@@ -32,7 +32,7 @@ export function App() {
     setLocalStorageTasks([
       ...tasks,
       {
-        id: crypto.randomUUID(),
+        id: Math.floor(Date.now() * Math.random()),
         description: taskDescription,
         isCompleted: false,
       }
@@ -43,13 +43,13 @@ export function App() {
     recoverSavedTasks()
   },[])
 
-  function deleteTasksById(taskId: string) {
+  function deleteTasksById(taskId: number) {
     const newTasks = tasks.filter((task) => task.id != taskId)
 
     setLocalStorageTasks(newTasks)
   }
 
-  function toggleCompletedTask (taskId: string) {
+  function toggleCompletedTask (taskId: number) {
     const newTasks = tasks.map(task => {
       if(task.id === taskId) {
         return {

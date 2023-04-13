@@ -2,6 +2,7 @@ export const lightTheme = {
     'text-title': '#323238',
     'text-base': '#121214',
     'text-button': '#E1E1E6',
+    'button-disabled': '#9bbfd4',
     'text-support': '#8D8D99',
     placeholder: '#000',
     'shape-secondary': '#DAE6E2',
